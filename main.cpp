@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <getopt.h>
+#include <AwsS3Helper.h>
 
 /**
  * @brief Prints help menu
@@ -29,6 +30,14 @@ int main(int argc, char **argv)
     }
 
     std::cout << "Port number: " << portNumber << std::endl;
+
+    AwsS3Helper awsHelper;
+    awsHelper.setBucket("BUCKET_NAME");
+    std::string awsObjectKeyDownload = "/vladast/test.txt";
+    std::string awsObjectKeyUpload = "/vladast/test.u.txt";
+    std::string fileName = awsHelper.download(awsObjectKeyDownload);
+    std::cout << "File downloaded to: " << fileName << std::endl;
+    awsHelper.upload(awsObjectKeyUpload, fileName);
 
     return EXIT_SUCCESS;
 }

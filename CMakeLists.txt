@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 
 project(bucketmediator)
 
-find_package(AWSSDK REQUIRED)
+set(CMAKE_CXX_STANDARD 11)
 
-add_executable(${PROJECT_NAME} main.cpp)
+find_package(AWSSDK REQUIRED)
+include_directories(${PROJECT_SOURCE_DIR})
+link_directories(/usr/local/lib)
+
+add_definitions(-DUSE_IMPORT_EXPORT)
+add_executable(${PROJECT_NAME}
+    main.cpp
+    AwsS3Helper.cpp)
+
+target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3)
