@@ -11,6 +11,7 @@ link_directories(/usr/local/lib)
 add_definitions(-DUSE_IMPORT_EXPORT)
 add_executable(${PROJECT_NAME}
     main.cpp
-    AwsS3Helper.cpp)
+    AwsS3Helper.cpp
+    FileHelper.cpp)
 
 target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3)
