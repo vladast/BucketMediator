@@ -15,6 +15,9 @@ add_executable(${PROJECT_NAME}
     FileHelper.cpp
     FileInfo.cpp
     AudioInfoSerializer.cpp
-    FileSizeInfoSerializer.cpp)
+    FileSizeInfoSerializer.cpp
+    RestServer.cpp
+    HttpRequest.cpp
+    HttpResponse.cpp)
 
 target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3)
