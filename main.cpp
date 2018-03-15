@@ -1,12 +1,24 @@
 #include <stdlib.h>
 #include <iostream>
 #include <getopt.h>
+#include <sys/stat.h>
 #include <AwsS3Helper.h>
+#include <FileHelper.h>
+#include <FileInfo.h>
+#include <AudioInfoSerializer.h>
+#include <FileSizeInfoSerializer.h>
+#include <RestServer.h>
 
 /**
  * @brief Prints help menu
  */
-void print_help();
+void PrintHelp();
+
+/**
+ * @brief Checks whether config file is present
+ * @return true if present, oterwise false
+ */
+bool IsConfigFileCreated();
 
 /**
  * @brief Main entry-point
@@ -24,25 +36,18 @@ int main(int argc, char **argv)
             break;
         case 'h':
         default:
-            print_help();
+            PrintHelp();
             exit(EXIT_FAILURE);
         }
     }
 
-    std::cout << "Port number: " << portNumber << std::endl;
-
-    AwsS3Helper awsHelper;
-    awsHelper.setBucket("BUCKET_NAME");
-    std::string awsObjectKeyDownload = "/vladast/test.txt";
-    std::string awsObjectKeyUpload = "/vladast/test.u.txt";
-    std::string fileName = awsHelper.download(awsObjectKeyDownload);
-    std::cout << "File downloaded to: " << fileName << std::endl;
-    awsHelper.upload(awsObjectKeyUpload, fileName);
+    RestServer restServer(portNumber, 5);
+    restServer.Run();
 
     return EXIT_SUCCESS;
 }
 
-void print_help()
+void PrintHelp()
 {
     std::string help = "bucketmediator version 0.1 Copyright (c) 2018 Vladimir Stankovic\n"
                        "usage: bucketmediator [options]\n"
