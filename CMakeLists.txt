@@ -14,10 +14,13 @@ add_executable(${PROJECT_NAME}
     AwsS3Helper.cpp
     FileHelper.cpp
     FileInfo.cpp
+    Mp3ToWavConverter.cpp
     AudioInfoSerializer.cpp
     FileSizeInfoSerializer.cpp
     RestServer.cpp
     HttpRequest.cpp
-    HttpResponse.cpp)
+    HttpResponse.cpp
+    RestRequestParams.cpp
+    RestRequestProcessor.cpp)
 
 target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3)

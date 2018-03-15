@@ -5,6 +5,7 @@ AwsS3Helper::AwsS3Helper()
     awsAccessKeyId = AWS_ACCESS_KEY_ID;
     awsSecretAccessKey = AWS_SECRET_ACCESS_KEY;
     awsS3BucketRegion = AWS_S3_BUCKET_REGION;
+    awsS3Bucket = AWS_S3_BUCKET;
 }
 
 AwsS3Helper::AwsS3Helper(const std::string& bucket) : awsS3Bucket(bucket.c_str())

@@ -13,6 +13,7 @@
 static const char* AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID";
 static const char* AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY";
 static const char* AWS_S3_BUCKET_REGION = Aws::Region::EU_WEST_1;
+static const char* AWS_S3_BUCKET = "AWS_S3_BUCKET";
 
 /**
  * @brief The AwsS3Helper class Used to wrap AWS SDK's download and upload functionality

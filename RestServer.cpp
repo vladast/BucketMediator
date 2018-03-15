@@ -1,6 +1,8 @@
 #include <RestServer.h>
 #include <HttpRequest.h>
 #include <HttpResponse.h>
+#include <RestRequestParams.h>
+#include <RestRequestProcessor.h>
 #include <sstream>
 #include <vector>
 
@@ -60,7 +62,11 @@ void RestServer::Run()
             std::cout << "Method: " << httpRequest.GetMethod() << std::endl;
             std::cout << "URI: " << httpRequest.GetRequestUri() << std::endl;
 
-            HttpResponse httpResponse(200, "Some Response Body...");
+            RestRequestParams restParams(httpRequest.GetRequestUri());
+
+            RestRequestProcessor restRequestProcessor;
+            HttpResponse httpResponse = restRequestProcessor(restParams);
+
             std::string response = httpResponse.ToString();
             write(clientSocket, response.c_str(), response.size());
 

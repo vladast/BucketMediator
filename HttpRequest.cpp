@@ -5,7 +5,6 @@
 HttpRequest::HttpRequest(std::stringstream& request)
 {
     std::string requestLine;
-    std::vector<std::string> tokens;
     bool firstLine = true;
     while(std::getline(request, requestLine))
     {
