@@ -30,6 +30,7 @@ public:
     bool InitServer();
     bool IsValid() const;
     void Run();
+    void Stop();
 };
 
 #endif // __REST_SERVER_H__

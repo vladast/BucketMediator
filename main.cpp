@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <getopt.h>
-#include <sys/stat.h>
+#include <unistd.h> // sleep
 #include <AwsS3Helper.h>
 #include <FileHelper.h>
 #include <FileInfo.h>
@@ -42,7 +42,18 @@ int main(int argc, char **argv)
     }
 
     RestServer restServer(portNumber, 5);
-    restServer.Run();
+    typedef void * (*RUNPTR)(void*);
+    pthread_t worker;
+    if (pthread_create(&worker, nullptr, (RUNPTR) &RestServer::Run, &restServer) != 0)
+    {
+        std::cout << "Haven't been able to create thread!" << std::endl;
+    }
+    else
+    {
+        // Additional processing here.
+        // restServer.Stop();
+    }
+    pthread_join(worker, nullptr);
 
     return EXIT_SUCCESS;
 }

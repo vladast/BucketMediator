@@ -77,13 +77,14 @@ bool RestServer::IsValid() const
 
 void RestServer::Run()
 {
+    std::cout << "Run within thread: " << pthread_self() << std::endl;
+
     if (listen(socketFileDescriptor, numberOfPendingConnections) == -1)
     {
         socketFileDescriptor = -1;
     }
     else
     {
-
         int threadCount = 0;
         std::vector<pthread_t> workers;
         running = true;
@@ -102,7 +103,7 @@ void RestServer::Run()
 
             pthread_t* worker = new pthread_t;
 
-            if (pthread_create(worker, NULL, &task, (void*)&clientSocket) != 0)
+            if (pthread_create(worker, nullptr, &task, (void*)&clientSocket) != 0)
             {
                 std::cout << "Haven't been able to create thread!" << std::endl;
             }
@@ -127,4 +128,10 @@ void RestServer::Run()
         std::cout << "Closing server's socket" << std::endl;
         close(socketFileDescriptor);
     }
+}
+
+void RestServer::Stop()
+{
+    std::cout << "Stopping... " << std::endl;
+    running = false;
 }
