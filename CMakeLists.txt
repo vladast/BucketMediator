@@ -23,4 +23,4 @@ add_executable(${PROJECT_NAME}
     RestRequestParams.cpp
     RestRequestProcessor.cpp)
 
-target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3)
+target_link_libraries(${PROJECT_NAME} aws-cpp-sdk-core aws-cpp-sdk-s3 pthread)
